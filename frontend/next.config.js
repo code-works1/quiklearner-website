@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+
   images: {
-    domains: ['res.cloudinary.com', 'saraviinfotech.com'],
+    domains: ['res.cloudinary.com', 'quicklearner.com'],
     formats: ['image/avif', 'image/webp'],
   },
+
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+
   async headers() {
     return [
       {

@@ -1,8 +1,8 @@
 'use client'
+import { Loader2, Send } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { Send, Loader2 } from 'lucide-react'
 
 type FormData = {
   name: string

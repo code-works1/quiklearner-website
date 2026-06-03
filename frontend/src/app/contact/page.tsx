@@ -29,7 +29,7 @@ export default function ContactPage() {
           <div className="space-y-6">
             {[
               { icon: Phone,   title: 'Call Us',    text: '+91 8143105167' },
-              { icon: Mail,    title: 'Email Us',   text: 'support@saraviinfotech.com' },
+              { icon: Mail,    title: 'Email Us',   text: 'support@quiklearner.com' },
               { icon: MapPin,  title: 'Visit Us',   text: 'Hyderabad, Telangana, India' },
               { icon: Clock,   title: 'Working Hours', text: 'Mon – Sat: 9AM to 7PM IST' },
             ].map(({ icon: Icon, title, text }) => (

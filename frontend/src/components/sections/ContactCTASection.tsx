@@ -22,8 +22,8 @@ export default function ContactCTASection() {
                 { icon: Clock, text: 'Mon–Sat: 9AM – 7PM IST' },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-3 text-brand-gray">
-                  <div className="w-10 h-10 rounded-xl bg-brand-gold/10 flex items-center justify-center flex-shrink-0">
-                    <Icon size={18} className="text-brand-gold" />
+                  <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center flex-shrink-0">
+                    <Icon size={18} className="text-red-600" />
                   </div>
                   <span>{text}</span>
                 </div>
