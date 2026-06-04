@@ -45,23 +45,23 @@ export default function ContactCTASection() {
             </div>
 
             {/* Branch locations */}
-            <div className="mt-8 rounded-2xl bg-gradient-brand p-6 overflow-hidden">
+            <div className="mt-8 rounded-2xl border border-red-100 bg-white p-6 shadow-sm">
               <h4
-                className="mb-4 text-center text-lg font-bold text-white"
+                className="mb-4 text-lg font-bold text-brand-navy"
                 style={{ fontFamily: 'var(--font-sora)' }}
               >
-                QuickLearner Branches in AP & Telangana
+                Branches in AP & Telangana
               </h4>
 
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="flex flex-wrap gap-2">
                 {branches.map((branch) => (
-                  <div
+                  <span
                     key={branch}
-                    className="rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                    className="rounded-full border border-red-100 bg-red-50 px-4 py-2 text-sm font-medium text-brand-navy"
                     style={{ fontFamily: 'var(--font-sora)' }}
                   >
                     {branch}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>

@@ -168,7 +168,7 @@ export default function PartnershipsSection() {
         </div>
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link href="/college-partnerships" className="btn-primary justify-center">
+          <Link href="/college-partnerships" className="btn-outline justify-center">
             College Partnerships
           </Link>
 

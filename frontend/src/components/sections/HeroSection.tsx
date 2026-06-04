@@ -89,9 +89,9 @@ export default function HeroSection() {
 
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-red-200 bg-white px-7 py-3 font-semibold text-red-700 shadow-sm transition-colors hover:bg-red-50"
+                className="group relative z-10 inline-flex items-center justify-center gap-2 rounded-full border border-red-300 bg-white px-7 py-3 font-semibold text-red-700 shadow-sm transition-all duration-200 hover:bg-red-600 hover:text-white hover:shadow-lg hover:shadow-red-600/25"
               >
-                <Play size={16} className="fill-current" />
+                <Play size={16} className="fill-current transition-transform duration-200 group-hover:scale-110" />
                 Free Demo
               </Link>
             </div>

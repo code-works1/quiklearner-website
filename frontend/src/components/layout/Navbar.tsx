@@ -60,7 +60,7 @@ export default function Navbar() {
               <Phone size={14} />
               <span style={{ fontFamily: 'var(--font-sora)' }}>+91 81431 05167</span>
             </a>
-            <Link href="/contact" className="btn-red px-4 py-2 text-sm">
+            <Link href="/contact" className="btn-primary">
               Enroll Now
             </Link>
           </div>
@@ -96,7 +96,7 @@ export default function Navbar() {
               >
                 <Phone size={15} /> +91 81431 05167
               </a>
-              <Link href="/contact" className="btn-red w-full justify-center text-sm"
+              <Link href="/contact" className="btn-gold text-sm"
                 onClick={() => setOpen(false)}
               >
                 Enroll Now

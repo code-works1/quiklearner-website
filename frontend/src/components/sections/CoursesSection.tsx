@@ -53,7 +53,7 @@ export default function CoursesSection() {
 
               {/* CTA */}
               <div className="mt-5 pt-4 border-t border-red-100 flex items-center justify-between gap-3">
-                <Link
+                {/* <Link
                   href={`/courses/${course.id}#curriculum`}
                   className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 transition-all hover:bg-red-600 hover:text-white"
                   style={{ fontFamily: 'var(--font-sora)' }}
@@ -62,7 +62,24 @@ export default function CoursesSection() {
                 </Link>
                 <Link href={`/courses/${course.id}`} aria-label={`View ${course.title}`}>
                   <ArrowRight size={18} className="text-brand-gold transform group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </Link> */}
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 transition-all hover:bg-red-600 hover:text-white"
+                  style={{ fontFamily: 'var(--font-sora)' }}
+                >
+                  <BookOpen size={15} /> Curriculum
+                </button>
+
+                <button
+                  type="button"
+                  aria-label={`View ${course.title}`}
+                >
+                  <ArrowRight
+                    size={18}
+                    className="text-brand-gold transform group-hover:translate-x-1 transition-transform"
+                  />
+                </button>
               </div>
             </article>
           ))}
