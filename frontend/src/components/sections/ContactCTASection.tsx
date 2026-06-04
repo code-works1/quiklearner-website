@@ -1,6 +1,16 @@
 import EnquiryForm from '@/components/ui/EnquiryForm'
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 
+const branches = [
+  'Visakhapatnam',
+  'Rajahmundry',
+  'Vijayawada',
+  'Tirupati',
+  'Guntur',
+  'Dilsukhnagar',
+  'Ameerpet',
+]
+
 export default function ContactCTASection() {
   return (
     <section className="py-20 bg-brand-light dot-bg" id="contact">
@@ -9,7 +19,11 @@ export default function ContactCTASection() {
           {/* Left */}
           <div>
             <span className="badge mb-4 inline-block">Get Started</span>
-            <h2 className="section-title mb-4">Ready to Transform Your Career?</h2>
+
+            <h2 className="section-title mb-4">
+              Ready to Transform Your Career?
+            </h2>
+
             <p className="text-brand-gray leading-relaxed mb-8">
               Fill in the form and our team will reach out within 24 hours to guide you to the right course, batch, and delivery mode.
             </p>
@@ -18,7 +32,7 @@ export default function ContactCTASection() {
               {[
                 { icon: Phone, text: '+91 8143105167' },
                 { icon: Mail, text: 'support@quiklearner.com' },
-                { icon: MapPin, text: 'Hyderabad, Telangana, India' },
+                { icon: MapPin, text: 'Krishna residency, Dilsukhnagar, Hyderabad 500060' },
                 { icon: Clock, text: 'Mon–Sat: 9AM – 7PM IST' },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-3 text-brand-gray">
@@ -30,18 +44,42 @@ export default function ContactCTASection() {
               ))}
             </div>
 
-            {/* Mini map placeholder */}
-            <div className="mt-8 h-48 rounded-2xl bg-gradient-brand flex items-center justify-center overflow-hidden">
-              <p className="text-white/60 text-sm" style={{ fontFamily: 'var(--font-sora)' }}>📍 Hyderabad, Telangana</p>
+            {/* Branch locations */}
+            <div className="mt-8 rounded-2xl bg-gradient-brand p-6 overflow-hidden">
+              <h4
+                className="mb-4 text-center text-lg font-bold text-white"
+                style={{ fontFamily: 'var(--font-sora)' }}
+              >
+                QuickLearner Branches in AP & Telangana
+              </h4>
+
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {branches.map((branch) => (
+                  <div
+                    key={branch}
+                    className="rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                    style={{ fontFamily: 'var(--font-sora)' }}
+                  >
+                    {branch}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Right: Form */}
           <div className="bg-white rounded-3xl shadow-brand p-8">
-            <h3 className="font-bold text-brand-navy text-xl mb-2" style={{ fontFamily: 'var(--font-sora)' }}>
+            <h3
+              className="font-bold text-brand-navy text-xl mb-2"
+              style={{ fontFamily: 'var(--font-sora)' }}
+            >
               Send Us an Enquiry
             </h3>
-            <p className="text-brand-gray text-sm mb-6">We'll get back to you within 24 hours.</p>
+
+            <p className="text-brand-gray text-sm mb-6">
+              We&apos;ll get back to you within 24 hours.
+            </p>
+
             <EnquiryForm />
           </div>
         </div>
