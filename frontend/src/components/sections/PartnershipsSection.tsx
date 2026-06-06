@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   Award,
   BriefcaseBusiness,
@@ -10,6 +9,7 @@ import {
   ShieldCheck,
   Users,
 } from 'lucide-react'
+import Link from 'next/link'
 
 const trustItems = [
   {

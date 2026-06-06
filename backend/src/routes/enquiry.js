@@ -1,31 +1,102 @@
 const express = require('express')
-const { body, validationResult } = require('express-validator')
-const { createEnquiry, getEnquiries } = require('../controllers/enquiryController')
+const Enquiry = require('../models/Enquiry')
+const {
+  buildEnquiriesExcelBuffer,
+  saveEnquiriesExcelFile,
+  excelPath,
+} = require('../utils/excelService')
+const { sendEnquiryEmail } = require('../utils/sendMail')
 
 const router = express.Router()
 
-// Validation rules
-const validateEnquiry = [
-  body('name').trim().isLength({ min: 2, max: 100 }).withMessage('Name must be 2–100 characters'),
-  body('email').isEmail().normalizeEmail().withMessage('Invalid email'),
-  body('phone').matches(/^[6-9]\d{9}$/).withMessage('Invalid Indian mobile number'),
-  body('course').notEmpty().withMessage('Course is required'),
-  body('message').optional().isLength({ max: 1000 }).withMessage('Message too long'),
-]
+router.post('/', async (req, res) => {
+  try {
+    const { name, email, phone, course, message } = req.body
 
-// Middleware to check validation
-const checkValidation = (req, res, next) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ error: errors.array()[0].msg })
+    if (!name || !email || !phone || !course) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name, email, phone and course are required',
+      })
+    }
+
+    const enquiry = await Enquiry.create({
+      name: String(name).trim(),
+      email: String(email).toLowerCase().trim(),
+      phone: String(phone).trim(),
+      course,
+      message,
+      status: 'new',
+      source: 'website',
+      ip:
+        req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+        req.socket.remoteAddress ||
+        '',
+    })
+
+    const enquiries = await Enquiry.find().sort({ createdAt: 1 }).lean()
+
+    const excelBuffer = await buildEnquiriesExcelBuffer(enquiries)
+
+    let excelSaved = false
+    let excelError = null
+
+    try {
+      await saveEnquiriesExcelFile(excelBuffer)
+      excelSaved = true
+    } catch (error) {
+      excelError = error.message
+      console.error('Excel file save failed:', error.message)
+    }
+
+    let emailSent = false
+    let emailError = null
+
+    try {
+      await sendEnquiryEmail(enquiry, excelBuffer)
+      emailSent = true
+    } catch (error) {
+      emailError = error.message
+      console.error('Admin email failed:', error.message)
+    }
+
+    return res.status(201).json({
+      success: true,
+      message: 'Enquiry submitted successfully',
+      data: enquiry,
+      excelSaved,
+      excelFile: excelPath,
+      excelError,
+      emailSent,
+      emailError,
+    })
+  } catch (error) {
+    console.error('Enquiry submit error:', error)
+
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to submit enquiry',
+      error: error.message,
+    })
   }
-  next()
-}
+})
 
-// POST /api/enquiry
-router.post('/', validateEnquiry, checkValidation, createEnquiry)
+router.get('/', async (req, res) => {
+  try {
+    const enquiries = await Enquiry.find().sort({ createdAt: -1 }).lean()
 
-// GET /api/enquiry (protected — add auth middleware in production)
-router.get('/', getEnquiries)
+    return res.status(200).json({
+      success: true,
+      count: enquiries.length,
+      data: enquiries,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to fetch enquiries',
+      error: error.message,
+    })
+  }
+})
 
 module.exports = router

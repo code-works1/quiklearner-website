@@ -109,6 +109,7 @@ app.use('/api/health', healthRoutes)
 
 // Enquiry routes
 app.use('/api/enquiry', enquiryLimiter, enquiryRoutes)
+app.use('/api/enquiries', enquiryLimiter, enquiryRoutes)
 
 // ── 404 handler ──────────────────────────────────────────────────────────────
 app.use((req, res) => {
@@ -130,6 +131,23 @@ app.use((err, req, res, next) => {
   })
 })
 
+// ── Environment validation ───────────────────────────────────────────────────
+if (!process.env.MONGODB_URI) {
+  console.warn('⚠️ MONGODB_URI is missing in .env. API will start, but database will not connect.')
+}
+
+if (!process.env.SMTP_USER && !process.env.EMAIL_USER) {
+  console.warn('⚠️ SMTP_USER or EMAIL_USER is missing in .env. Admin emails will fail until configured.')
+}
+
+if (!process.env.SMTP_PASS && !process.env.EMAIL_PASS) {
+  console.warn('⚠️ SMTP_PASS or EMAIL_PASS is missing in .env. Admin emails will fail until configured.')
+}
+
+if (!process.env.ADMIN_EMAIL) {
+  console.warn('⚠️ ADMIN_EMAIL is missing in .env. Admin emails will fail until configured.')
+}
+
 // ── Start server immediately ─────────────────────────────────────────────────
 // Important for Railway: bind to 0.0.0.0 and use process.env.PORT
 const server = app.listen(PORT, '0.0.0.0', () => {
@@ -138,17 +156,19 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 
 // ── MongoDB connection ───────────────────────────────────────────────────────
 // Do not block server startup while MongoDB connects
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    serverSelectionTimeoutMS: 10000,
-    socketTimeoutMS: 45000,
-  })
-  .then(() => {
-    console.log('✅ MongoDB connected')
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection failed:', err.message)
-  })
+if (process.env.MONGODB_URI) {
+  mongoose
+    .connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
+    })
+    .then(() => {
+      console.log('✅ MongoDB connected')
+    })
+    .catch((err) => {
+      console.error('❌ MongoDB connection failed:', err.message)
+    })
+}
 
 // ── Graceful shutdown ────────────────────────────────────────────────────────
 process.on('SIGTERM', async () => {
