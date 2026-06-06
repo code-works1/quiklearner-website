@@ -27,11 +27,9 @@ app.use(morgan('combined'))
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
-  'https://saraviinfotech.com',
   'https://quiklearner-frontend-git-main-sivacodeworks.vercel.app',
-  'https://www.saraviinfotech.com',
-  'https://quicklearner.com',
-  'https://www.quicklearner.com',
+  'https://quiklearner.com',
+  'https://www.quiklearner.com',
   process.env.FRONTEND_URL,
   process.env.CLIENT_URL,
 ].filter(Boolean)
