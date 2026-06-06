@@ -4,7 +4,7 @@
   "framework": "nextjs",
   "regions": ["sin1"],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://saraviinfotech-backend-production.up.railway.app"
+    "NEXT_PUBLIC_API_URL": "https://quiklearner-website-production.up.railway.app"
   },
   "headers": [
     {

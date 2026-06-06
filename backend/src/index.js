@@ -26,7 +26,7 @@ app.use(morgan('combined'))
 // Add frontend URL later in Railway as FRONTEND_URL=https://your-vercel-url.vercel.app
 const allowedOrigins = [
   'http://localhost:3000',
-  'http://127.0.0.1:3000',
+  'http://localhost:3001',
   'https://quiklearner-frontend-git-main-sivacodeworks.vercel.app',
   'https://quiklearner.com',
   'https://www.quiklearner.com',
