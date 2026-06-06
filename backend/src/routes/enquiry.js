@@ -35,40 +35,30 @@ router.post('/', async (req, res) => {
     })
 
     const enquiries = await Enquiry.find().sort({ createdAt: 1 }).lean()
-
     const excelBuffer = await buildEnquiriesExcelBuffer(enquiries)
-
-    let excelSaved = false
-    let excelError = null
 
     try {
       await saveEnquiriesExcelFile(excelBuffer)
-      excelSaved = true
     } catch (error) {
-      excelError = error.message
-      console.error('Excel file save failed:', error.message)
+      console.error('Excel save failed:', error.message)
     }
 
-    let emailSent = false
-    let emailError = null
-
-    try {
-      await sendEnquiryEmail(enquiry, excelBuffer)
-      emailSent = true
-    } catch (error) {
-      emailError = error.message
-      console.error('Admin email failed:', error.message)
-    }
-
-    return res.status(201).json({
+    // Send success response first
+    res.status(201).json({
       success: true,
       message: 'Enquiry submitted successfully',
       data: enquiry,
-      excelSaved,
-      excelFile: excelPath,
-      excelError,
-      emailSent,
-      emailError,
+      excelSaved: true,
+    })
+
+    // Send email in background
+    setImmediate(async () => {
+      try {
+        await sendEnquiryEmail(enquiry, excelBuffer)
+        console.log('Admin email sent successfully')
+      } catch (error) {
+        console.error('Admin email failed:', error.message)
+      }
     })
   } catch (error) {
     console.error('Enquiry submit error:', error)
@@ -80,23 +70,4 @@ router.post('/', async (req, res) => {
     })
   }
 })
-
-router.get('/', async (req, res) => {
-  try {
-    const enquiries = await Enquiry.find().sort({ createdAt: -1 }).lean()
-
-    return res.status(200).json({
-      success: true,
-      count: enquiries.length,
-      data: enquiries,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch enquiries',
-      error: error.message,
-    })
-  }
-})
-
 module.exports = router
