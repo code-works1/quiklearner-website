@@ -50,6 +50,23 @@ router.post('/', async (req, res) => {
       data: enquiry,
       excelSaved: true,
     })
+    router.get('/', async (req, res) => {
+  try {
+    const enquiries = await Enquiry.find().sort({ createdAt: -1 }).lean()
+
+    return res.status(200).json({
+      success: true,
+      count: enquiries.length,
+      data: enquiries,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to fetch enquiries',
+      error: error.message,
+    })
+  }
+})
 
     // Send email in background
     setImmediate(async () => {
