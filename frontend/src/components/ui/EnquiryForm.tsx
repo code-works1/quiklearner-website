@@ -18,6 +18,8 @@ const courseOptions = [
   'MERN Stack',
   'Data Science',
   'AI & Machine Learning',
+  'Gen AI',
+  'Agentic AI',
   'Cybersecurity',
   'Data Analytics',
   'Java Full Stack',

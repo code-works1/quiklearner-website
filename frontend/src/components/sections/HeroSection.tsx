@@ -10,7 +10,7 @@ const stats = [
   { icon: TrendingUp, value: '50+', label: 'MNC & Hiring Partners' },
 ]
 
-const tags = ['Python', 'MERN Stack', 'AI/ML', 'Data Science', 'Cybersecurity', 'Java', 'Cloud', 'DevOps']
+const tags = ['Python', 'MERN Stack', 'AI/ML', 'Gen AI', 'Agentic AI', 'Data Science', 'Cybersecurity', 'Java', 'Cloud', 'DevOps']
 const trustBadges = [
   { icon: ShieldCheck, text: 'ISO Certified Institute' },
   { icon: Building2, text: 'Affiliated with Multiple MNCs' },

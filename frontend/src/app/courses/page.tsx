@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import { courses } from '@/components/sections/CoursesSection'
+import { courses } from '@/lib/courses'
 import Link from 'next/link'
-import { Clock, Users, Star, ArrowRight } from 'lucide-react'
+import { Clock, Users, Star, ArrowRight, BookOpen } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Courses | All Software Training Programs',

@@ -96,7 +96,7 @@ export default function Footer() {
           <ul className="space-y-3">
             {[
               { icon: Phone, text: '+91 8143105167', href: 'tel:+918143105167' },
-              { icon: Mail, text: 'support@quiklearner.com', href: 'mailto:support@quiklearner.com' },
+              { icon: Mail, text: 'support@quicklearner.com', href: 'mailto:support@quiklearner.com' },
               { icon: Globe, text: 'www.quiklearner.com', href: 'https://www.quiklearner.com' },
               { icon: MapPin, text: 'Krishna residency, Dilsukhnagar, Hyderabad 500060', href: '#' },
             ].map(({ icon: Icon, text, href }) => (
