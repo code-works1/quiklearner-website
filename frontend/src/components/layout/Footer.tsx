@@ -20,7 +20,7 @@ export default function Footer() {
             </p>
             <p className="text-sm text-white/80">ISO certified institute • MNC affiliation focus • internship support</p>
           </div>
-          <Link href="/contact" className="btn-primary whitespace-nowrap border-0 bg-white text-brand-navy shadow-none hover:bg-gray-100">
+          <Link href="/contact" className="btn-primary">
             Enroll for Free Demo →
           </Link>
         </div>
