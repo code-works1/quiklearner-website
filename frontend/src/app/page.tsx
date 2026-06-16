@@ -1,6 +1,7 @@
 import ContactCTASection from '@/components/sections/ContactCTASection'
 import CoursesSection from '@/components/sections/CoursesSection'
 import HeroSection from '@/components/sections/HeroSection'
+import MouPartnershipsSection from '@/components/sections/MouPartnershipsSection'
 import PartnershipsSection from '@/components/sections/PartnershipsSection'
 import PlacedCompaniesSection from '@/components/sections/PlacedCompaniesSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
@@ -18,6 +19,7 @@ export default function HomePage() {
       <CoursesSection />
       <WhyUsSection />
       <PartnershipsSection />
+      <MouPartnershipsSection />
       <TestimonialsSection />
       <PlacedCompaniesSection />
       <ContactCTASection />
